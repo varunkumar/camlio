@@ -1,4 +1,5 @@
 import cv2
+import numpy
 
 
 class ImageOverlayTransformer:
@@ -23,6 +24,55 @@ class ImageOverlayTransformer:
         cv2.putText(img, text, pos, font_face, scale,
                     fg_color, 1, cv2.LINE_AA, False)
 
+    @staticmethod
+    def __overlay_transparent1(background, overlay, x, y):
+        background_width = background.shape[1]
+        background_height = background.shape[0]
+
+        if x >= background_width or y >= background_height:
+            return background
+
+        rows, cols, channels = overlay.shape
+        overlay = cv2.addWeighted(
+            background[y:y+rows, x:x+cols], 0.8, overlay, 0.5, 0)
+        background[y:y+rows, x:x+cols] = overlay
+
+    @staticmethod
+    def __overlay_transparent(background, overlay, x, y):
+        background_width = background.shape[1]
+        background_height = background.shape[0]
+
+        if x >= background_width or y >= background_height:
+            return background
+
+        h, w = overlay.shape[0], overlay.shape[1]
+
+        if x + w > background_width:
+            w = background_width - x
+            overlay = overlay[:, :w]
+
+        if y + h > background_height:
+            h = background_height - y
+            overlay = overlay[:h]
+
+        if overlay.shape[2] < 4:
+            overlay = numpy.concatenate(
+                [
+                    overlay,
+                    numpy.ones(
+                        (overlay.shape[0], overlay.shape[1], 1), dtype=overlay.dtype) * 255
+                ],
+                axis=2,
+            )
+
+        overlay_image = overlay[..., :3]
+        mask = overlay[..., 3:] / 255.0
+
+        background[y:y + h, x:x + w] = (1.0 - mask) * \
+            background[y:y + h, x:x + w] + mask * overlay_image
+
+        return background
+
     def transform(self, frame, config):
         if (config and len(config) > 0):
             for item in config:
@@ -43,3 +93,9 @@ class ImageOverlayTransformer:
                 if ("text" in item.keys()):
                     self.__draw_label(
                         frame, item["text"], (item["position"]["left"], item["position"]["top"]), bg_color, fg_color)
+                elif ("image" in item.keys()):
+                    img = cv2.imread(item["image"])
+                    # self.__overlay_transparent(
+                    #    frame, img, item["position"]["left"], item["position"]["top"])
+                    self.__overlay_transparent1(
+                        frame, img, item["position"]["left"], item["position"]["top"])

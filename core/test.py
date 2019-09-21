@@ -10,7 +10,8 @@ loop = asyncio.get_event_loop()
 
 videoStream = CamlioVideoStreamTrack(4)
 videoStream.configuration = {
-    "overlay": [{"position": {"top": 500, "left": 500}, "text": "Varunkumar Nagarajan"}, {"position": {"top": 100, "left": 0}, "text": "Sreekanth Gunda"}],
+    "overlay": [{"position": {"top": 700, "left": 850}, "text": "Varunkumar Nagarajan"},
+                {"position": {"top": 20, "left": 20}, "image": "./overlay/arc.png"}, {"position": {"left": 20, "top": 600}, "image": "./overlay/camlio.png"}],
 }
 
 
