@@ -11,4 +11,4 @@ class ScreenCapturer:
         if (config):
             sct = mss.mss()
             screen = numpy.array(sct.grab(sct.monitors[1]))
-            return screen[..., :3][..., ::-1]
+            return screen

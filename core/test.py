@@ -8,13 +8,14 @@ from video_stream import CamlioVideoStreamTrack
 loop = asyncio.get_event_loop()
 
 
-videoStream = CamlioVideoStreamTrack(0)
+videoStream = CamlioVideoStreamTrack(4)
 videoStream.configuration = {
     "overlay": [{"position": {"top": 700, "left": 850}, "text": "Varunkumar Nagarajan"},
                 {"position": {"top": 20, "left": 20}, "image": "./overlay/arc.png"}, {"position": {"left": 20, "top": 600}, "image": "./overlay/camlio.png"}],
-    # "presentation": {"layout": 1}
-    "hologram": 1,
-    "scene": 'office.jpeg'
+    # "presentation": "layout-1",
+    # "hologram": 1,
+    "scene": 'office.jpeg',
+    "blur": 1
 }
 
 

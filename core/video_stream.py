@@ -5,11 +5,11 @@ import numpy
 from aiortc import VideoStreamTrack
 from av import VideoFrame
 
+from transformers.blur_bg_transformer import BlurBgTransformer
 from transformers.hologram_transformer import HolgramTransformer
 from transformers.image_overlay_transformer import ImageOverlayTransformer
-from transformers.screen_transformer import ScreenCapturer
-from transformers.blur_bg_transformer import BlurBgTransformer
 from transformers.scene_transformer import SceneTransformer
+from transformers.screen_transformer import ScreenCapturer
 
 
 class CamlioVideoStreamTrack(VideoStreamTrack):
@@ -32,19 +32,22 @@ class CamlioVideoStreamTrack(VideoStreamTrack):
 
             # Apply transformations based on config
             if (self.configuration and "scene" in self.configuration.keys()):
-                raw = self.scene_transformer.transform(raw, self.configuration["scene"])
+                raw = self.scene_transformer.transform(
+                    raw, self.configuration["scene"])
+                raw = cv2.cvtColor(raw, cv2.COLOR_BGRA2BGR)
 
             if (self.configuration and "blur" in self.configuration and self.configuration["blur"]):
                 raw = self.blur_bg_transformer.transform(raw)
+                raw = cv2.cvtColor(raw, cv2.COLOR_BGRA2BGR)
 
             if (self.configuration and "overlay" in self.configuration.keys()):
                 self.overlayTransformer.transform(
                     raw, self.configuration["overlay"])
 
             if (self.configuration and "presentation" in self.configuration.keys()):
-              # TODO: Fix color screen
                 raw = self.screenCapturer.transform(
                     raw, self.configuration["presentation"])
+                raw = cv2.cvtColor(raw, cv2.COLOR_BGRA2BGR)
 
             if (self.configuration and "hologram" in self.configuration.keys()):
               # TODO: remove background
