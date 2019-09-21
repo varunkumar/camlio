@@ -87,7 +87,9 @@ const configuration = {};
 
 const sendConfiguration = config => {
   fetch('https://localhost:8081/configure', {
-    body: JSON.stringify(config),
+    body: JSON.stringify({
+      configuration: config
+    }),
     headers: {
       'Content-Type': 'application/json'
     },
@@ -96,22 +98,15 @@ const sendConfiguration = config => {
 };
 
 const scenes = [
-  './media/scenes/bridge.jpg',
-  './media/scenes/office.jpeg',
-  './media/scenes/hussainsagar.jpeg',
-  './media/scenes/newyork.jpg'
+  'bridge.jpg',
+  'office.jpeg',
+  'hussainsagar.jpeg',
+  'newyork.jpg'
 ];
 
-const overlays = [
-  './media/overlay/arc.png',
-  './media/overlay/arcesium.png',
-  './media/overlay/camlio.png'
-];
+const overlays = ['arc.png', 'arcesium.png', 'camlio.png'];
 
-const layouts = [
-  './media/layouts/layout-1.svg',
-  './media/layouts/layout-3.svg'
-];
+const layouts = ['layout-1.svg', 'layout-3.svg'];
 
 const toggleScene = () => {
   const img = document.querySelector('#ctrlScene');
@@ -122,12 +117,13 @@ const toggleScene = () => {
     delete configuration.scene;
   } else {
     // Turn on
+    configuration.scene = scenes[0];
     $('#controls-extra').html(
       scenes
         .map(scene => {
           return `<img class="scene ${
             configuration.scene === scene ? 'active' : ''
-          }" src="${scene}" ></img>`;
+          }" src="./media/scenes/${scene}" data-src="${scene}"></img>`;
         })
         .join('') + '<a href="#" style="display: inline">Browse</a>'
     );
@@ -163,7 +159,7 @@ const toggleOverlay = () => {
     $('#controls-extra').html(
       overlays
         .map(overlay => {
-          return `<img class="overlay" src="${overlay}" ></img>`;
+          return `<img class="overlay" src="./media/overlay/${overlay}" ></img>`;
         })
         .join('') + '<a href="#" style="display: inline">Browse</a>'
     );
@@ -185,12 +181,12 @@ const toggleShare = () => {
     $('#controls-extra').html(
       layouts
         .map(layout => {
-          return `<img class="layout" src="${layout}" ></img>`;
+          return `<img class="layout" src="./media/layouts/${layout}" ></img>`;
         })
         .join('')
     );
     img.parentElement.classList.add('active');
-    configuration.presentation = {};
+    configuration.presentation = 'layout-1';
   }
   sendConfiguration(configuration);
 };
@@ -215,7 +211,8 @@ const initializeEventListeners = () => {
   $('#camliaControls').on('click', '.scene', e => {
     $('.scene').removeClass('active');
     $(e.target).addClass('active');
-    configuration.scene = $(e.target).src;
+    configuration.scene = $(e.target).data('src');
+    sendConfiguration(configuration);
   });
   document.querySelector('#ctrlBlur').addEventListener('click', toggleBlur);
   document
