@@ -1,0 +1,19 @@
+1. Blur
+2. Image background
+3. Image overlay
+4. Hologram
+5. Presentation
+
+config
+{
+  "blur": true,
+  "scene": "scene-1",
+  "overlay": {image: "logo-1", position: {top: 0, left: 0}},
+  "hologram": true,
+  "presentation": {
+    layout: "layout-1",
+    layers: [
+      "screen", "webcam"
+    ]
+  }
+}
