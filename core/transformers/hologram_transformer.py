@@ -79,9 +79,30 @@ class HolgramTransformer:
         if (config):
             frame = cv2.resize(frame, (460, 460),
                                interpolation=cv2.INTER_NEAREST)
-            hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
-            hsv[:, :, 2] += 255
-            frame = cv2.cvtColor(hsv, cv2.COLOR_HSV2BGR)
+            # Image operation using thresholding
+            gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+            ret, thresh = cv2.threshold(
+                gray, 0, 255, cv2.THRESH_BINARY_INV + cv2.THRESH_OTSU)
+
+            # Noise removal using Morphological closing operation
+            kernel = np.ones((1, 1), np.uint8)
+            closing = cv2.morphologyEx(
+                thresh, cv2.MORPH_CLOSE, kernel, iterations=10)
+
+            # Finding foreground area
+            dist_transform = cv2.distanceTransform(closing, cv2.DIST_L2, 0)
+            ret, fg = cv2.threshold(dist_transform, 0.02 *
+                                    dist_transform.max(), 255, 0)
+            fg = fg.astype(np.uint8)
+
+            # Prepare new background (scene) and foreground and finally overlay them together
+            foreground_without_bg = cv2.bitwise_and(frame, frame, mask=fg)
+            frame = foreground_without_bg
+
+            # hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
+            # hsv[:, :, 2] += 255
+            # frame = cv2.cvtColor(hsv, cv2.COLOR_HSV2BGR)
+
             holo = make_hologram(frame)
             x = holo.shape[1]
             y = holo.shape[0]
