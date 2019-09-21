@@ -1,0 +1,473 @@
+@font-face {
+  font-family: ProximaNova_Light;
+  src: url(font/ProximaNova_Light.otf) format('opentype');
+}
+@font-face {
+  font-family: ProximaNova_Bold;
+  src: url(font/ProximaNova_Bold.otf) format('opentype');
+}
+@font-face {
+  font-family: ProximaNova;
+  src: url(font/ProximaNova.otf) format('opentype');
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+.clear {
+  clear: both;
+}
+body {
+  font-family: ProximaNova_Light, Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #292929;
+  background: #f4f9ff;
+}
+.container {
+  width: 90%;
+  margin: 0 auto;
+}
+section {
+  padding: 30px 0;
+}
+a {
+  text-decoration: none;
+  color: #292929;
+}
+td .strong {
+  font-family: ProximaNova_Bold, Helvetica, Arial, sans-serif;
+}
+header {
+  padding: 40px 0 30px 0;
+  background: #1478c7;
+  background: -webkit-linear-gradient(90deg, #006fd2, #1ad1e0);
+  background: -o-linear-gradient(90deg, #006fd2, #1ad1e0);
+  background: -moz-linear-gradient(90deg, #006fd2, #1ad1e0);
+  background: linear-gradient(90deg, #006fd2, #1ad1e0);
+}
+.header-bar a {
+  float: left;
+  margin-right: 15px;
+}
+.header-bar p {
+  color: white;
+  display: inline-block;
+  font-size: 24px;
+  line-height: 26px;
+}
+.logo {
+  padding: 0;
+  margin: 0;
+  height: 26px;
+}
+
+header .banner-text {
+  padding: 30px 0 15px 0;
+}
+header .banner-text p {
+  margin: 0 auto;
+  color: white;
+  text-align: center;
+}
+header .banner-text .banner-head {
+  font-size: 28px;
+  display: block;
+}
+header .banner-text .banner-subhead {
+  font-size: 16px;
+  line-height: 1.5;
+  margin-top: 10px;
+}
+footer {
+  margin-top: 50px;
+  text-align: center;
+  padding: 20px 0;
+  background: #dde4ee;
+  border-radius: 0;
+}
+.banner-link {
+  font-size: 13px;
+  line-height: 26px;
+}
+.banner-link a {
+  font-family: ProximaNova, Helvetica, Arial, sans-serif;
+}
+.copyright p {
+  color: #204e74;
+  font-size: 12px;
+}
+
+h1.page-headline {
+  font-size: 28px;
+  margin-top: 20px;
+  margin-bottom: 40px;
+}
+
+div#media {
+  overflow: hidden;
+}
+video {
+  margin: auto;
+  display: block;
+  vertical-align: middle;
+  width: 98%;
+  background: #444;
+  text-align: center;
+  z-index: -1;
+}
+.videodiv {
+  float: left;
+  width: 50%;
+}
+
+.remotevid {
+  width: 50%;
+}
+.localvid {
+  width: 30%;
+}
+.roster {
+  width: 20%;
+}
+.rostern {
+  width: 80%;
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.rosterv {
+  width: 15%;
+}
+.rostera {
+  width: 15%;
+}
+
+.contentdiv {
+  width: 100%;
+}
+
+#localVideo {
+  float: left;
+  border-radius: 0px 0px 5px 5px;
+}
+#remoteVideo {
+  float: left;
+  display: none;
+  border-radius: 0px 0px 5px 5px;
+}
+#plist {
+  float: left;
+  width: 100%;
+  padding: 5px;
+  background-color: #dde4ee;
+  min-height: 90px;
+  border-radius: 0 0 5px 5px;
+}
+
+#contentVideo {
+  float: left;
+  border-radius: 0px 0px 5px 5px;
+  width: 100%;
+  z-index: 1;
+  display: none;
+}
+
+#noshare {
+  margin: auto;
+  display: flex;
+  vertical-align: middle;
+  min-height: 100px;
+  background-color: #444;
+  text-align: center;
+  z-index: -1;
+  border-radius: 0px 0px 5px 5px;
+}
+
+.offair {
+  margin: auto;
+  border-radius: 5px;
+}
+
+.vidtitle {
+  text-align: left;
+  font-family: ProximaNova_Bold;
+  font-size: 14px;
+  line-height: 27px;
+  background: #204e74;
+  display: inline-block;
+  padding: 0 12px;
+  color: white;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  z-index: 10;
+}
+.locvidtitle {
+  margin-left: 2%;
+}
+
+#wait4agent {
+  float: left;
+  width: 90%;
+  padding-top: 12%;
+  padding-bottom: 12%;
+  position: relative;
+  min-height: 192px;
+  margin: auto;
+  background-color: #dde4ee;
+  border-radius: 0 0 5px 5px;
+  z-index: -1;
+}
+
+@keyframes rotating {
+  0% {
+    transform: rotate(0deg);
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+    -webkit-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+  }
+}
+
+#wait4agent img {
+  width: 20%;
+  margin-left: auto;
+  margin-right: auto;
+  display: none;
+  animation-name: rotating;
+  animation-duration: 2s;
+  animation-timing-function: cubic-bezier(0.64, 0, 0.26, 0.98);
+  animation-iteration-count: infinite;
+}
+
+#wait4agent p {
+  font-size: 1.2em;
+  color: black;
+  text-align: center;
+  display: none;
+}
+
+.userMedia {
+  width: 49%;
+  float: left;
+}
+.userMedia fieldset {
+  background: white;
+  border-radius: 5px;
+  width: calc(100%-40px);
+  box-shadow: 0px 0px 36px rgba(156, 172, 194, 0.1);
+  padding: 40px;
+  padding-top: 20px;
+  border: 0;
+}
+#localMediaControls {
+  float: right;
+}
+
+#audioIn {
+  width: 98%;
+}
+
+#contentShare {
+  float: right;
+  padding-top: 30px;
+}
+
+legend {
+  background-color: #1478c7; /* #204E74; */
+  color: white;
+  font-family: ProximaNova_Bold;
+  font-size: 13px;
+  line-height: 32px;
+  text-align: center;
+  text-transform: uppercase;
+  padding: 0 20px;
+  margin-top: -60px;
+  z-index: 10;
+}
+table.widget-crl {
+  width: 100%;
+}
+table.widget-crl tr {
+  line-height: 2.2em;
+}
+table.widget-crl td.table-label {
+  width: 22%;
+  font-size: 14px;
+}
+label {
+  font-family: ProximaNova_Bold;
+  display: inline-block;
+  margin-bottom: 20px;
+  margin-right: 15px;
+}
+input {
+  display: block;
+  vertical-align: middle;
+  line-height: 24px;
+  margin: 0 auto;
+  width: 100%;
+  border-bottom: 1px solid #dde4ee;
+  -webkit-transition: all linear 0.2s;
+  -moz-transition: all linear 0.2s;
+  -o-transition: all linear 0.2s;
+  transition: all linear 0.2s;
+}
+input::placeholder {
+  color: #d5dee9;
+  font-family: ProximaNova_Light;
+}
+input:focus {
+  border-bottom: 2px solid #11a8f3;
+  outline: 0;
+}
+input:focus::-webkit-input-placeholder {
+  color: transparent;
+}
+input:focus:-moz-placeholder {
+  color: transparent;
+} /* FF 4-18 */
+input:focus::-moz-placeholder {
+  color: transparent;
+} /* FF 19+ */
+input:focus:-ms-input-placeholder {
+  color: transparent;
+}
+.mtginputs {
+  border: none;
+  border-bottom: 1px solid #9cacc3; /* #DDE4EE; */
+  padding: 2px;
+  font-size: 1em;
+  width: 90%;
+  float: left;
+  text-align: left;
+}
+.control-btn-row {
+  margin-top: 20px;
+}
+button.controls {
+  padding: 10px 20px;
+  border-radius: 5px;
+  color: white;
+  font-size: 14px;
+  font-family: ProximaNova_Bold, Helvetica, Arial, sans-serif;
+  display: inline-block;
+  border: 0;
+  cursor: pointer;
+}
+button:focus {
+  border: 0;
+  outline: 0;
+}
+#toggleVideoMute,
+#toggleAudioMute {
+  background-color: #12a8f1;
+  color: white;
+  display: inline-block;
+}
+#toggleVideoMute {
+  margin-right: 10px;
+}
+#joinMeeting {
+  background-color: #3bca7c;
+  color: white;
+  margin-right: 10px;
+}
+#joinMeeting:hover {
+}
+#leaveMeeting {
+  background-color: #ef476f;
+  color: white;
+}
+#leaveMeeting:hover {
+}
+button.hidden {
+  display: none;
+}
+#toggleVideoMute.muted,
+#toggleAudioMute.muted {
+  background: #9cacc3;
+}
+
+@media only screen and (max-width: 480px) {
+  .videodiv,
+  .userMedia {
+    width: 100%;
+  }
+  .localvid {
+    margin-top: 20px;
+  }
+  video {
+    float: left;
+    width: 100%;
+  }
+  .vidtitle {
+    margin-left: 0;
+  }
+  #joinMeetingControls {
+    margin-top: 40px;
+  }
+  table.widget-crl td.table-label {
+    font-size: 14px;
+    text-align: left;
+  }
+  .control-btn-row {
+    text-align: center;
+  }
+  button.controls {
+    width: 100%;
+  }
+  #toggleVideoMute,
+  #joinMeeting {
+    margin-bottom: 20px;
+  }
+  .userMedia fieldset {
+    padding: 20px;
+  }
+  .container {
+    width: 96%;
+  }
+}
+
+@media only screen and (min-width: 481px) and (max-width: 850px) {
+  header {
+    padding: 20px 0 10px 0;
+  }
+  .logo {
+    padding: 0;
+    margin: 0;
+    height: 22px;
+  }
+  .banner-link {
+    float: none;
+    font-size: 13px;
+    line-height: 30px;
+  }
+  .videodiv,
+  .userMedia {
+    width: 100%;
+  }
+  .localvid {
+    margin-top: 20px;
+  }
+  video {
+    float: left;
+    width: 100%;
+  }
+  .vidtitle {
+    margin-left: 0;
+  }
+  #joinMeetingControls {
+    margin-top: 40px;
+  }
+  .userMedia fieldset {
+    padding: 30px;
+  }
+}

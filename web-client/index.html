@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>WebRTC SDK Sample App</title>
+	<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+	<header>
+	  <div class="container">
+		<div class="header-bar">
+		    <a href="index.html"><img class="logo" src="bjn-developer-logo.svg" alt="Bluejeans"></a>
+		    <p>| &nbsp;WebRTC SDK Reference Application</p>		    
+		</div>
+		
+	</header>
+	<div class="container">
+		<section>
+			<div id="media">
+				<div class="videodiv remotevid">
+					<p class="vidtitle remvidtitle">Remote Video</p>
+					<video id="remoteVideo"></video>
+					<div id="wait4agent">
+					  <img id="waitimg" src="./media/circle.svg"/> 
+					  <p id="waittext">Please Wait for <i>Someone</i> to Join</p>
+					</div>
+					
+				</div>
+				<div class="videodiv localvid">
+					<div><p class="vidtitle locvidtitle">Local Video</p></div>
+					<video id="localVideo"></video>
+				</div>
+				<div class="videodiv roster">
+					<div><p class="vidtitle">Roster</p></div>
+					<div id="plist">
+					  <table id="parties">
+					    <tr></tr>
+					  </table>					
+					</div>
+				</div>
+		    </div>
+		</section>
+		<section style="padding-top: 0px;">
+		    <div class="userMedia" id="localMediaControls">			    
+		        <fieldset>	
+			        <legend>Local Media Controls</legend>	            		
+		            <div id="muteControls" class="controls-set">
+		                <table class="widget-crl">
+			                <tr><td class="table-label" style="font-family: ProximaNova_Bold;">Mute Options:</td>
+		                        <td>
+			                        <button class="controls" id="toggleVideoMute">Mute Video</button>
+									<button class="controls" id="toggleAudioMute">Mute Audio</button>
+								</td>
+		                    </tr>
+		                	<tr><td class="table-label">Volume:</td>
+		                        <td><input type="text" class="mtginputs" id="volume" value=0 readonly></td>
+		                    </tr>
+		                </table>
+		                
+		            </div>		
+		        </fieldset>
+		    </div>
+		    <div class="userMedia" id="joinMeetingControls">
+		        <fieldset>
+		            <legend>Join Meeting Controls</legend>
+		            <div id="callControls" class="controls-set">
+		                <table class="widget-crl">
+		                    <tr><td class="table-label">Meeting ID:</td>
+		                        <td><input placeholder="Enter Meeting ID" type="text" class="mtginputs" id="id" name="Meeting id"></td>
+		                    </tr>
+							<tr><td class="table-label">PassCode:</td>
+		                        <td><input type="text" placeholder="Enter PassCode" class="mtginputs" id="passCode" name="PassCode" ></td>
+		                    </tr>
+							<tr><td class="table-label">Your Name:</td>
+		                        <td><input placeholder="Enter your name" type="text" class="mtginputs" 
+								id="yourName" name="yourName"
+								value="WebRTC User"></td>
+							</tr>
+							<tr><td class="table-label">Camera:</td>
+		                    <td><select id="videoIn">
+		
+		                        </select></td>
+							</tr>
+							<tr>
+							  <td class="table-label">Video Quality:</td>
+							  <td><select id="videoBw">
+							    <option value="4096">HD (4096 Kbps)</option>
+							    <option value="2048">Very Hi (2048 Kbps)</option>
+							    <option value="1500">Hi (1500 Kbps)</option>
+							    <option value="1024">Mid (1024 Kbps)</option>
+							    <option value="512" selected>Eco (512 Kbps)</option>
+							    <option value="100">Low (100 Kbps)</option>
+								</select>
+							  </td>
+							</tr>
+							<tr><td class="table-label">Microphone:</td>
+		                    <td><select id="audioIn">
+		                        </select></td>
+							</tr>
+		
+		                    <tr><td class="table-label">Speaker:</td>
+		                    <td><select id="audioOut">
+		
+		                        </select></td>
+							</tr>
+		                </table>
+		                <div class="control-btn-row">
+			                <button class="controls" id="joinMeeting">Join Meeting</button>
+			                <button class="controls hidden" id="leaveMeeting">End Meeting</button>
+		                </div>
+		            </div>
+		
+		        </fieldset>
+		    </div>
+			<div class="userMedia" id="contentShare">
+				<div class="videodiv contentdiv" style="overflow:hidden;">
+					<p class="vidtitle remvidtitle">Content Share</p>
+					<div class="novideo" id="noshare">
+						<img id="noContent" class="offair" src="media/BlueJeans_Mark.png" />
+						<video id="contentVideo"></video>
+					</div>
+				</div>
+			</div>			
+		    <div class="clear"></div>
+		</section>
+	</div>
+	<footer>
+		<div class="copyright">
+		   <p>SDK Version: <span id="sdkversion"></span> </p>
+		</div>
+		<div class="container">
+			<p class="banner-link"><a href="https://github.com/bluejeans" target="_blank">BlueJeans on GitHub</a>
+		    <span>&nbsp; | &nbsp;</span> <a href="https://www.bluejeans.com" target="_blank">BlueJeans.com</a></p>
+		</div>
+		<div class="copyright">
+			<p>© <span id="curr_year"></span> Copyright BlueJeans Network. All Rights Reserved.</p>
+  		</div>
+	</footer>
+	<script src="external/jquery.min.js"></script>
+<script data-main="requirejs-config.js" src="external/require.js"></script>
+<script type="text/javascript">
+    // create global BJN sdk object
+    var BJN = {
+
+    };
+    var d = new Date();
+	var n = d.getFullYear();
+	$("#curr_year").text(n);
+</script>
+</body>
+</html>
