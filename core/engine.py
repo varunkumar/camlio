@@ -16,6 +16,18 @@ from video_stream import CamlioVideoStreamTrack
 ROOT = os.path.dirname(__file__)
 
 
+async def configure(request):
+    params = await request.json()
+    videoStream.configuration = params["configuration"]
+
+    return web.Response(
+        content_type="application/json",
+        text=json.dumps(
+            {"200": "OK"}
+        ),
+    )
+
+
 async def offer(request):
     params = await request.json()
     offer = RTCSessionDescription(sdp=params["sdp"], type=params["type"])
@@ -41,7 +53,7 @@ async def offer(request):
         if t.kind == "audio" and player and player.audio:
             pc.addTrack(player.audio)
         elif t.kind == "video":
-            pc.addTrack(CamlioVideoStreamTrack(args.video_device_index))
+            pc.addTrack(videoStream)
 
     answer = await pc.createAnswer()
     await pc.setLocalDescription(answer)
@@ -63,6 +75,7 @@ async def on_shutdown(app):
     await asyncio.gather(*coros)
     pcs.clear()
 
+videoStream = None
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Camlio engine")
@@ -87,6 +100,10 @@ if __name__ == "__main__":
     else:
         ssl_context = None
 
+    videoStream = CamlioVideoStreamTrack(args.video_device_index)
+    videoStream.configuration = {
+        "overlay": [{"position": {"top": 0, "left": 0}, "text": "Varunkumar Nagarajan"}, {"position": {"top": 100, "left": 0}, "text": "Sreekanth Gunda"}],
+    }
     app = web.Application()
     cors = aiohttp_cors.setup(app, defaults={
         # Allow all to read all CORS-enabled resources from
@@ -97,5 +114,8 @@ if __name__ == "__main__":
     app.on_shutdown.append(on_shutdown)
     cors.add(
         app.router.add_route("POST", "/offer", offer)
+    )
+    cors.add(
+        app.router.add_route("POST", "/configure", configure)
     )
     web.run_app(app, port=args.port, ssl_context=ssl_context)
