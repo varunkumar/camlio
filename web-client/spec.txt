@@ -10,10 +10,5 @@ config
   "scene": "scene-1",
   "overlay": [{image: "logo-1", position: {top: 0, left: 0}, text: "Varun", bg_color: {blue:128, red:128, green: 128}}],
   "hologram": true,
-  "presentation": {
-    layout: "layout-1",
-    layers: [
-      "screen", "webcam"
-    ]
-  }
+  "presentation": "layout-1"
 }

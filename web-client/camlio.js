@@ -73,6 +73,7 @@ function negotiate() {
 
 function clientStart(handler) {
   negotiate();
+  initializeEventListeners();
 }
 
 function clientStop() {
@@ -81,3 +82,147 @@ function clientStop() {
     pc.close();
   }, 500);
 }
+
+const configuration = {};
+
+const sendConfiguration = config => {
+  fetch('https://localhost:8081/configure', {
+    body: JSON.stringify(config),
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    method: 'POST'
+  });
+};
+
+const scenes = [
+  './media/scenes/bridge.jpg',
+  './media/scenes/office.jpeg',
+  './media/scenes/hussainsagar.jpeg',
+  './media/scenes/newyork.jpg'
+];
+
+const overlays = [
+  './media/overlay/arc.png',
+  './media/overlay/arcesium.png',
+  './media/overlay/camlio.png'
+];
+
+const layouts = [
+  './media/layouts/layout-1.svg',
+  './media/layouts/layout-3.svg'
+];
+
+const toggleScene = () => {
+  const img = document.querySelector('#ctrlScene');
+  if (img.parentElement.classList.contains('active')) {
+    // Turn off
+    $('#controls-extra').html('');
+    img.parentElement.classList.remove('active');
+    delete configuration.scene;
+  } else {
+    // Turn on
+    $('#controls-extra').html(
+      scenes
+        .map(scene => {
+          return `<img class="scene ${
+            configuration.scene === scene ? 'active' : ''
+          }" src="${scene}" ></img>`;
+        })
+        .join('') + '<a href="#" style="display: inline">Browse</a>'
+    );
+    img.parentElement.classList.add('active');
+  }
+  sendConfiguration(configuration);
+};
+
+const toggleBlur = () => {
+  const img = document.querySelector('#ctrlBlur');
+  if (img.parentElement.classList.contains('active')) {
+    // Turn off
+    $('#controls-extra').html('');
+    img.parentElement.classList.remove('active');
+    delete configuration.blur;
+  } else {
+    // Turn on
+    img.parentElement.classList.add('active');
+    configuration.blur = true;
+  }
+  sendConfiguration(configuration);
+};
+
+const toggleOverlay = () => {
+  const img = document.querySelector('#ctrlOverlay');
+  if (img.parentElement.classList.contains('active')) {
+    // Turn off
+    $('#controls-extra').html('');
+    img.parentElement.classList.remove('active');
+    delete configuration.overlay;
+  } else {
+    // Turn on
+    $('#controls-extra').html(
+      overlays
+        .map(overlay => {
+          return `<img class="overlay" src="${overlay}" ></img>`;
+        })
+        .join('') + '<a href="#" style="display: inline">Browse</a>'
+    );
+    img.parentElement.classList.add('active');
+    configuration.overlay = [];
+  }
+  sendConfiguration(configuration);
+};
+
+const toggleShare = () => {
+  const img = document.querySelector('#ctrlShare');
+  if (img.parentElement.classList.contains('active')) {
+    // Turn off
+    $('#controls-extra').html('');
+    img.parentElement.classList.remove('active');
+    delete configuration.presentation;
+  } else {
+    // Turn on
+    $('#controls-extra').html(
+      layouts
+        .map(layout => {
+          return `<img class="layout" src="${layout}" ></img>`;
+        })
+        .join('')
+    );
+    img.parentElement.classList.add('active');
+    configuration.presentation = {};
+  }
+  sendConfiguration(configuration);
+};
+
+const toggleHologram = () => {
+  const img = document.querySelector('#ctrlHologram');
+  if (img.parentElement.classList.contains('active')) {
+    // Turn off
+    $('#controls-extra').html('');
+    img.parentElement.classList.remove('active');
+    delete configuration.hologram;
+  } else {
+    // Turn on
+    img.parentElement.classList.add('active');
+    configuration.hologram = true;
+  }
+  sendConfiguration(configuration);
+};
+
+const initializeEventListeners = () => {
+  document.querySelector('#ctrlScene').addEventListener('click', toggleScene);
+  $('#camliaControls').on('click', '.scene', e => {
+    $('.scene').removeClass('active');
+    $(e.target).addClass('active');
+    configuration.scene = $(e.target).src;
+  });
+  document.querySelector('#ctrlBlur').addEventListener('click', toggleBlur);
+  document
+    .querySelector('#ctrlOverlay')
+    .addEventListener('click', toggleOverlay);
+  document.querySelector('#ctrlShare').addEventListener('click', toggleShare);
+  document
+    .querySelector('#ctrlHologram')
+    .addEventListener('click', toggleHologram);
+};

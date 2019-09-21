@@ -480,12 +480,61 @@ button.hidden {
   float: right;
 }
 
-#camlioControls img {
+#camlioControls td img {
   width: 60px;
+  cursor: pointer;
 }
 
-#camlioControls img:hover {
-  opacity: 0.5;
+#camlioControls td img:hover {
+  opacity: 0.7;
+}
+
+.scene {
+  width: 100px;
+  border: solid 1px #aaa;
+  margin: 4px;
+  cursor: pointer;
+}
+
+.scene.active {
+  width: 100px;
+  border: solid 5px #0a0;
+}
+
+.overlay {
+  width: 50px;
+  border: solid 1px #aaa;
+  margin: 4px;
+  cursor: pointer;
+}
+
+.overlay.active {
+  width: 50px;
+  border: solid 5px #0a0;
+}
+
+.layout {
+  width: 60px;
+  border: solid 1px #aaa;
+  margin: 4px;
+  cursor: pointer;
+}
+
+.layout.active {
+  width: 60px;
+  border: solid 5px #0a0;
+}
+
+#camlioControls .active:after {
+  position: absolute;
+  content: '';
+  background: url(media/icons/check.svg);
+  background-size: 20px 20px;
+  background-repeat: no-repeat;
+  width: 20px;
+  height: 20px;
+  margin-left: -65px;
+  margin-top: 0px;
 }
 
 #camlioControls td {
