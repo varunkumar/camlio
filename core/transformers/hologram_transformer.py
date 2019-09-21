@@ -74,36 +74,39 @@ def make_hologram(original, scale=0.5, scaleR=3, distance=0):
 class HolgramTransformer:
     def __init__(self):
         super().__init__()
+        cascPath = "transformers/haarcascade_frontalface_default.xml"
+        self.faceCascade = cv2.CascadeClassifier(cascPath)
+        self.face = None
 
     def transform(self, frame, config):
         if (config):
-            frame = cv2.resize(frame, (460, 460),
-                               interpolation=cv2.INTER_NEAREST)
-            # Image operation using thresholding
             gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-            ret, thresh = cv2.threshold(
-                gray, 0, 255, cv2.THRESH_BINARY_INV + cv2.THRESH_OTSU)
+            faces = self.faceCascade.detectMultiScale(
+                gray,
+                scaleFactor=1.1,
+                minNeighbors=5,
+                minSize=(100, 100)
+            )
 
-            # Noise removal using Morphological closing operation
-            kernel = np.ones((1, 1), np.uint8)
-            closing = cv2.morphologyEx(
-                thresh, cv2.MORPH_CLOSE, kernel, iterations=10)
+            # Draw a rectangle around the faces
+            face = None
+            for (x, y, w, h) in faces:
+                face = frame[y:y + h, x:x + w]
 
-            # Finding foreground area
-            dist_transform = cv2.distanceTransform(closing, cv2.DIST_L2, 0)
-            ret, fg = cv2.threshold(dist_transform, 0.02 *
-                                    dist_transform.max(), 255, 0)
-            fg = fg.astype(np.uint8)
+            if (face is None):
+                face = self.face
 
-            # Prepare new background (scene) and foreground and finally overlay them together
-            foreground_without_bg = cv2.bitwise_and(frame, frame, mask=fg)
-            frame = foreground_without_bg
+            if (face is None):
+                face = frame
 
-            # hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
-            # hsv[:, :, 2] += 255
-            # frame = cv2.cvtColor(hsv, cv2.COLOR_HSV2BGR)
+            self.face = cv2.resize(face, (460, 460),
+                                   interpolation=cv2.INTER_NEAREST)
+            hsv = cv2.cvtColor(self.face, cv2.COLOR_BGR2HSV)
+            hsv[:, :, 2] += 255
+            self.face = cv2.cvtColor(hsv, cv2.COLOR_HSV2BGR)
 
-            holo = make_hologram(frame)
+            holo = make_hologram(self.face)
+
             x = holo.shape[1]
             y = holo.shape[0]
             left = right = int((1280 - x) / 2)
