@@ -5,6 +5,7 @@ import numpy
 from aiortc import VideoStreamTrack
 from av import VideoFrame
 
+from transformers.hologram_transformer import HolgramTransformer
 from transformers.image_overlay_transformer import ImageOverlayTransformer
 from transformers.screen_transformer import ScreenCapturer
 
@@ -15,6 +16,7 @@ class CamlioVideoStreamTrack(VideoStreamTrack):
         self.video_capture = cv2.VideoCapture(video_device_index)
         self.overlayTransformer = ImageOverlayTransformer()
         self.screenCapturer = ScreenCapturer()
+        self.hologramTransformer = HolgramTransformer()
 
     def setConfiguration(self, configuration):
         self.configuration = json.loads(configuration)
@@ -32,6 +34,10 @@ class CamlioVideoStreamTrack(VideoStreamTrack):
             if (self.configuration and "presentation" in self.configuration.keys()):
                 raw = self.screenCapturer.transform(
                     raw, self.configuration["presentation"])
+
+            if (self.configuration and "hologram" in self.configuration.keys()):
+                raw = self.hologramTransformer.transform(
+                    raw, self.configuration["hologram"])
 
             frame = VideoFrame.from_ndarray(raw, format="bgr24")
             frame.pts = pts
