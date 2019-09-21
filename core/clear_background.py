@@ -1,6 +1,7 @@
-import numpy as np
 import cv2
+import numpy as np
 import sys
+import os
 
 def make_frame_transparent(src):
     tmp = cv2.cvtColor(src, cv2.COLOR_BGR2GRAY)
@@ -11,7 +12,7 @@ def make_frame_transparent(src):
     return dst
 
 video_capture = cv2.VideoCapture(0)
-o_background_scene = make_frame_transparent(cv2.imread('office.jpeg'))
+o_background_scene = make_frame_transparent(cv2.imread('/Users/sreekanth/Projects/camlio/core/scenes/bridge.jpg'))
 
 while(1):
     ret, frame = video_capture.read()
