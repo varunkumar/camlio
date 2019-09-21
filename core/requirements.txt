@@ -1,0 +1,4 @@
+cv2
+numpy
+aiohttp_cors
+aiortc

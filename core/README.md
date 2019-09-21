@@ -15,3 +15,6 @@ python engine.py --port 8081 --cert-file secrets/server.crt --key-file secrets/s
 ```bash
 ffmpeg -f avfoundation -list_devices true -i ""
 ```
+
+2. How to generate SSL certificate?
+Follow the instructions given at https://devcenter.heroku.com/articles/ssl-certificate-self
