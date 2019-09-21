@@ -14,8 +14,7 @@ videoStream.configuration = {
                 {"position": {"top": 20, "left": 20}, "image": "./overlay/arc.png"}, {"position": {"left": 20, "top": 600}, "image": "./overlay/camlio.png"}],
     # "presentation": "layout-1",
     # "hologram": 1,
-    "scene": 'office.jpeg',
-    "blur": 1
+    "scene": 'bridge.jpeg'
 }
 
 

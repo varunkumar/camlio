@@ -105,6 +105,7 @@ if __name__ == "__main__":
         "overlay": [{"position": {"top": 700, "left": 850}, "text": "Varunkumar Nagarajan"},
                     {"position": {"top": 20, "left": 20}, "image": "./overlay/arc.png"}, {"position": {"left": 20, "top": 600}, "image": "./overlay/camlio.png"}],
     }
+    videoStream.configuration = {}
     app = web.Application()
     cors = aiohttp_cors.setup(app, defaults={
         # Allow all to read all CORS-enabled resources from

@@ -98,10 +98,10 @@ const sendConfiguration = config => {
 };
 
 const scenes = [
-  'bridge.jpg',
+  'bridge.jpeg',
   'office.jpeg',
   'hussainsagar.jpeg',
-  'newyork.jpg'
+  'newyork.jpeg'
 ];
 
 const overlays = ['arc.png', 'arcesium.png', 'camlio.png'];

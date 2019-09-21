@@ -15,7 +15,7 @@ def make_frame_transparent(src):
 
 
 video_capture = cv2.VideoCapture(4)
-o_background_scene = make_frame_transparent(cv2.imread('scenes/office.jpeg'))
+o_background_scene = make_frame_transparent(cv2.imread('scenes/bridge.jpeg'))
 
 while(1):
     ret, frame = video_capture.read()
