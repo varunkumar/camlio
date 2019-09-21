@@ -102,7 +102,7 @@ if __name__ == "__main__":
 
     videoStream = CamlioVideoStreamTrack(args.video_device_index)
     videoStream.configuration = {
-        "overlay": [{"position": {"top": 0, "left": 0}, "text": "Varunkumar Nagarajan"}, {"position": {"top": 100, "left": 0}, "text": "Sreekanth Gunda"}],
+        "overlay": [{"position": {"top": 700, "left": 850}, "text": "Varunkumar Nagarajan"}],
     }
     app = web.Application()
     cors = aiohttp_cors.setup(app, defaults={

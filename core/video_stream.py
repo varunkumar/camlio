@@ -23,7 +23,7 @@ class CamlioVideoStreamTrack(VideoStreamTrack):
             ret, raw = self.video_capture.read()
 
             # Apply transformations based on config
-            if (self.configuration["overlay"]):
+            if (self.configuration and self.configuration["overlay"]):
                 self.overlayTransformer.transform(
                     raw, self.configuration["overlay"])
 
