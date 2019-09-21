@@ -159,7 +159,7 @@ const toggleOverlay = () => {
     $('#controls-extra').html(
       overlays
         .map(overlay => {
-          return `<img class="overlay" src="./media/overlay/${overlay}" ></img>`;
+          return `<img class="overlay" src="./media/overlay/${overlay}" data-src="${overlay}"></img>`;
         })
         .join('') + '<a href="#" style="display: inline">Browse</a>'
     );
@@ -178,15 +178,17 @@ const toggleShare = () => {
     delete configuration.presentation;
   } else {
     // Turn on
+    configuration.presentation = layouts[0];
     $('#controls-extra').html(
       layouts
         .map(layout => {
-          return `<img class="layout" src="./media/layouts/${layout}" ></img>`;
+          return `<img class="layout ${
+            configuration.presentation === layout ? 'active' : ''
+          }" src="./media/layouts/${layout}" data-src="${layout}"></img>`;
         })
         .join('')
     );
     img.parentElement.classList.add('active');
-    configuration.presentation = 'layout-1';
   }
   sendConfiguration(configuration);
 };
@@ -212,6 +214,13 @@ const initializeEventListeners = () => {
     $('.scene').removeClass('active');
     $(e.target).addClass('active');
     configuration.scene = $(e.target).data('src');
+    sendConfiguration(configuration);
+  });
+
+  $('#camliaControls').on('click', '.layout', e => {
+    $('.layout').removeClass('active');
+    $(e.target).addClass('active');
+    configuration.presentation = $(e.target).data('src');
     sendConfiguration(configuration);
   });
   document.querySelector('#ctrlBlur').addEventListener('click', toggleBlur);

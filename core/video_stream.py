@@ -47,7 +47,6 @@ class CamlioVideoStreamTrack(VideoStreamTrack):
             if (self.configuration and "presentation" in self.configuration.keys()):
                 raw = self.screenCapturer.transform(
                     raw, self.configuration["presentation"])
-                raw = cv2.cvtColor(raw, cv2.COLOR_BGRA2BGR)
 
             if (self.configuration and "hologram" in self.configuration.keys()):
               # TODO: remove background

@@ -12,8 +12,8 @@ videoStream = CamlioVideoStreamTrack(4)
 videoStream.configuration = {
     "overlay": [{"position": {"top": 700, "left": 850}, "text": "Varunkumar Nagarajan"},
                 {"position": {"top": 20, "left": 20}, "image": "./overlay/arc.png"}, {"position": {"left": 20, "top": 600}, "image": "./overlay/camlio.png"}],
-    # "presentation": "layout-1",
-    "hologram": 1,
+    "presentation": "layout-3.svg",
+    # "hologram": 1,
     # "scene": 'bridge.jpeg'
 }
 
