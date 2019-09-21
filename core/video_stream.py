@@ -42,10 +42,12 @@ class CamlioVideoStreamTrack(VideoStreamTrack):
                     raw, self.configuration["overlay"])
 
             if (self.configuration and "presentation" in self.configuration.keys()):
+              # TODO: Fix color screen
                 raw = self.screenCapturer.transform(
                     raw, self.configuration["presentation"])
 
             if (self.configuration and "hologram" in self.configuration.keys()):
+              # TODO: remove background
                 raw = self.hologramTransformer.transform(
                     raw, self.configuration["hologram"])
 
