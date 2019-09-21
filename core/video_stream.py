@@ -6,6 +6,7 @@ from aiortc import VideoStreamTrack
 from av import VideoFrame
 
 from transformers.image_overlay_transformer import ImageOverlayTransformer
+from transformers.screen_transformer import ScreenCapturer
 
 
 class CamlioVideoStreamTrack(VideoStreamTrack):
@@ -13,6 +14,7 @@ class CamlioVideoStreamTrack(VideoStreamTrack):
         super().__init__()
         self.video_capture = cv2.VideoCapture(video_device_index)
         self.overlayTransformer = ImageOverlayTransformer()
+        self.screenCapturer = ScreenCapturer()
 
     def setConfiguration(self, configuration):
         self.configuration = json.loads(configuration)
@@ -23,9 +25,13 @@ class CamlioVideoStreamTrack(VideoStreamTrack):
             ret, raw = self.video_capture.read()
 
             # Apply transformations based on config
-            if (self.configuration and self.configuration["overlay"]):
+            if (self.configuration and "overlay" in self.configuration.keys()):
                 self.overlayTransformer.transform(
                     raw, self.configuration["overlay"])
+
+            if (self.configuration and "presentation" in self.configuration.keys()):
+                raw = self.screenCapturer.transform(
+                    raw, self.configuration["presentation"])
 
             frame = VideoFrame.from_ndarray(raw, format="bgr24")
             frame.pts = pts
