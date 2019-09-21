@@ -161,8 +161,18 @@ const toggleOverlay = () => {
         .map(overlay => {
           return `<img class="overlay" src="./media/overlay/${overlay}" data-src="${overlay}"></img>`;
         })
-        .join('') + '<a href="#" style="display: inline">Browse</a>'
+        .join('') +
+        '<input type="text" class="overlay-text" placeholder="Text overlay"></input>'
     );
+    $('.overlay-text').keypress(function(event) {
+      var keycode = event.keyCode ? event.keyCode : event.which;
+      if (keycode == '13') {
+        configuration.overlay = [
+          { position: { top: 700, left: 850 }, text: $('.overlay-text').val() }
+        ];
+        sendConfiguration(configuration);
+      }
+    });
     img.parentElement.classList.add('active');
     configuration.overlay = [];
   }
@@ -223,6 +233,16 @@ const initializeEventListeners = () => {
     configuration.presentation = $(e.target).data('src');
     sendConfiguration(configuration);
   });
+
+  $('#camliaControls').on('click', '.overlay', e => {
+    $('.overlay').removeClass('active');
+    $(e.target).addClass('active');
+    configuration.overlay = [
+      { position: { left: 20, top: 20 }, image: $(e.target).data('src') }
+    ];
+    sendConfiguration(configuration);
+  });
+
   document.querySelector('#ctrlBlur').addEventListener('click', toggleBlur);
   document
     .querySelector('#ctrlOverlay')

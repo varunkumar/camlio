@@ -94,7 +94,7 @@ class ImageOverlayTransformer:
                     self.__draw_label(
                         frame, item["text"], (item["position"]["left"], item["position"]["top"]), bg_color, fg_color)
                 elif ("image" in item.keys()):
-                    img = cv2.imread(item["image"])
+                    img = cv2.imread("overlay/" + item["image"])
                     # self.__overlay_transparent(
                     #    frame, img, item["position"]["left"], item["position"]["top"])
                     self.__overlay_transparent1(
