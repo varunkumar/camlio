@@ -9,7 +9,7 @@ Experiments with real-time video processing
 - Platform Neutral
 
 ### Background replacement
-![background_replacement](background_replacement "background_replacement 1")
+![background_replacement](background_replacement.png "background_replacement 1")
 
 ### Hologram Projection
 ![hologram](hologram_projection.png "hologram_projection 1")
