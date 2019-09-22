@@ -20,16 +20,16 @@ Experiments with real-time video processing
 ## Technologies used
 
 - Used
-- Web RTC
-- Bluejeans SDK
-- Python 3.7 & Open CV
-- Vanilla web technologies
-- Netlify
+   - Web RTC
+   - Bluejeans SDK
+   - Python 3.7 & Open CV
+   - Vanilla web technologies
+   - Netlify
 
 - Explored
-- Unet Human segmentation
-- Keras
-- Tensorflow
-- Syphon
-- PyUSB
-- Windows DirectShow
+   - Unet Human segmentation
+   - Keras
+   - Tensorflow
+   - Syphon
+   - PyUSB
+   - Windows DirectShow
