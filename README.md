@@ -1,6 +1,6 @@
 # Camlio
 
-Experiments with real-time video processing https://camlio.live
+Experiments with real-time video processing https://camlio.live. This was a hack built at [Arcesium](https://arcesium.com) Hackathon 2019. Camlio is a Bluejeans client that uses real-time video processing techniques to enhance 'work from home' experience.
 
 ## Features Provided
 - Professional immersive experience with hologram projection
@@ -33,3 +33,8 @@ Experiments with real-time video processing https://camlio.live
    - Syphon
    - PyUSB
    - Windows DirectShow
+
+## Contributors
+
+[@sreekanthnaga](https://twitter.com/sreekanthnaga)
+[@varunkumar](https://twitter.com/varunkumar)
