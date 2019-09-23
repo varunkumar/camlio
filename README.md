@@ -6,7 +6,7 @@ Experiments with real-time video processing https://camlio.live. This was a hack
 
 - You need to start the core engine using the instructions [here](core/README.md)
 - BlueJeans API / SDK doesn't support CORS. Hence, web client needs to be accessed by disabling web security.
-- Open Chrome by disabling web security. Go to https://camlio.live to start your Bluejeans session
+- Open Chrome by disabling web security ([Instructions](web-client/README.md)). Go to https://camlio.live to start your Bluejeans session
 
 ## Features Provided
 - Professional immersive experience with hologram projection
