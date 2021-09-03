@@ -1,6 +1,6 @@
 # Camlio
 
-Experiments with real-time video processing https://camlio.live. This was a hack built at [Arcesium](https://arcesium.com) Hackathon 2019 in 24 hrs. Camlio is a Bluejeans client that uses real-time video processing techniques to enhance 'work from home' experience.
+Experiments with real-time video processing https://camlio.live. This was a hack built at [Arcesium](https://arcesium.com) Hackathon 2019 in 24 hrs. This was the grand prize winning hack of the year. Camlio is a Bluejeans client that uses real-time video processing techniques to enhance 'work from home' experience.
 
 ## How to try this out? 
 
