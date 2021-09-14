@@ -23,13 +23,12 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "trim": "^0.0.3",
-    "ws": "^7.4.6"
-  },
-  "devDependencies": {
+    "ws": "^7.4.6",
     "browserslist": "^4.16.5",
     "cross-env": "^7.0.3",
     "immer": "~9.0.6",
-    "object-path": "~0.11.6",
-    "ws": "^7.4.6"
-  }
+    "object-path": "~0.11.6"
+  },
+  "devDependencies": {
+      }
 }
