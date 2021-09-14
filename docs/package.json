@@ -15,20 +15,20 @@
   },
   "dependencies": {
     "@lekoarts/gatsby-theme-cara": "^2.0.4",
+    "browserslist": "^4.16.5",
+    "cross-env": "^7.0.3",
     "gatsby": "^3.13.0",
     "gatsby-plugin-google-analytics": "^3.13.0",
     "gatsby-plugin-manifest": "^3.13.0",
     "gatsby-plugin-netlify": "^3.13.0",
     "gatsby-plugin-offline": "^4.13.0",
+    "immer": "^9.0.6",
+    "object-path": "^0.11.6",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "set-value": "^4.0.1",
     "trim": "^0.0.3",
-    "ws": "^7.4.6",
-    "browserslist": "^4.16.5",
-    "cross-env": "^7.0.3",
-    "immer": "^9.0.6",
-    "object-path": "^0.11.6"
+    "ws": "^7.4.6"
   },
-  "devDependencies": {
-      }
+  "devDependencies": {}
 }
